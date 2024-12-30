@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShreeJI Education</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBot7cgJDNDynaj7PhjIoi8CwT9ypWtncA",
+            authDomain: "shreeejidb.firebaseapp.com",
+            projectId: "shreeejidb",
+            storageBucket: "shreeejidb.firebasestorage.app",
+            messagingSenderId: "628120313770",
+            appId: "1:628120313770:web:8e68b14e03f0ab299e55d3",
+            measurementId: "G-GQLWWD6T7T"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Form Submission Handler
+        const form = document.getElementById('volunteerForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const fullName = form.fullName.value;
+            const email = form.email.value;
+            const phone = form.phone.value;
+            const message = form.message.value;
+
+            // Add the data to Firestore
+            try {
+                const docRef = await addDoc(collection(db, "counselling_forms"), {
+                    fullName: fullName,
+                    email: email,
+                    phone: phone,
+                    message: message,
+                });
+                alert("Form submitted successfully!");
+                form.reset(); // Reset the form after submission
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                alert("Problem submitting the form.");
+            }
+        });
+    </script>
+</head>
+<body class="bg-gray-50">
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085" alt="Annapurna Logo" class="logo-img">
+                    <span class="logo-text">ShreeJi Education</span>
+                </div>
+                <div class="nav-links">
+                    <!-- <input type="search" placeholder="Search..." class="search-input"> -->
+                    <a href="#" class="link">About Us</a>
+                    <!-- <a href="#" class="link">Contact Us</a> -->
+                    <button class="internship-btn">Internship</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="hero-section">
+            <div class="hero-background">
+                <img src="https://tse2.mm.bing.net/th?id=OIP.b-vI65A-rRxaSqPpXtNHWAHaEc&pid=Api&P=0&h=180" alt="Hero Background" class="hero-img">
+            </div>
+            <div class="hero-text">
+                <h1 class="hero-title">Career Counselling made easy!</h1><br>
+                <p class="hero-subtitle">Call us to get free career Counselling</p>
+                <a href="tel:+919359181248" class="hero-btn"> <i class="fa-solid fa-phone"></i> &nbsp; Connect with us </a>
+            </div>
+        </section>
+
+        <section class="volunteer-section">
+            <div class="container">
+                <div class="volunteer-header">
+                    <h2 class="volunteer-title">Get Career Counselling</h2>
+                    <p class="volunteer-subtitle">Make a difference in your life today</p>
+                </div>
+                <form class="volunteer-form" id="volunteerForm">
+                    <input type="text" name="fullName" placeholder="Full Name" class="form-input" required>
+                    <input type="email" name="email" placeholder="Email Address" class="form-input" required>
+                    <input type="tel" name="phone" placeholder="Phone Number" class="form-input" required>
+                    <textarea name="message" placeholder="Your Message" rows="4" class="form-input" required></textarea>
+                    <button type="submit" class="submit-btn">Submit Application</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">ShreeJi Education</h3>
+                    <p class="footer-text">Together we can make a difference</p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">Address: <br> HIMT College, plot-8, institutional Area, KP 1, Gr. Noida, Uttar Pradesh 201301 <br> <br><a></li>
+                        <li><a href="#" class="footer-link">Contact</a></li>
+                        <li><a href="#" class="footer-link">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ShreeJi Education. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="app.js"></script>
+</body>
+</html>
